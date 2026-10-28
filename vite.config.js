@@ -1,5 +1,7 @@
+import { readFileSync } from "node:fs";
 import { defineConfig, loadEnv } from "vite";
 import vue from "@vitejs/plugin-vue";
+const version = JSON.parse(readFileSync(new URL("./package.json", import.meta.url), "utf8")).version;
 const escape = (s) =>
   String(s)
     .replaceAll("&", "&amp;")
@@ -17,6 +19,7 @@ export default defineConfig(({ mode }) => {
         transformIndexHtml(html) {
           const tags = [
             ["apiBase", env.API_BASE],
+            ["pond:version", `v${version}`],
             ["pond:title", env.TITLE],
             ["pond:background", env.BACKGROUND_IMAGE],
           ]

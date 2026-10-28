@@ -1,0 +1,48 @@
+name: Build theme
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: pond-pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build:github-page
+        env:
+          API_BASE: ${{ secrets.API_BASE }}
+          TITLE: ${{ secrets.TITLE }}
+          BACKGROUND_IMAGE: ${{ secrets.BACKGROUND_IMAGE }}
+          CSP_API: ${{ secrets.CSP_API }}
+          CSP_STATIC: ${{ secrets.CSP_STATIC }}
+      - name: Append build to dist branch
+        shell: bash
+        run: |
+          git log -1 --format=%B "$GITHUB_SHA" > "$RUNNER_TEMP/pond-message.txt"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if git ls-remote --exit-code --heads origin dist; then
+            git fetch origin dist
+            git worktree add "$RUNNER_TEMP/pond-pages" -B dist origin/dist
+          else
+            git worktree add --detach "$RUNNER_TEMP/pond-pages" HEAD
+            git -C "$RUNNER_TEMP/pond-pages" switch --orphan dist
+          fi
+          rsync -a --delete --exclude='.git' dist/ "$RUNNER_TEMP/pond-pages/"
+          git -C "$RUNNER_TEMP/pond-pages" add --all
+          if ! git -C "$RUNNER_TEMP/pond-pages" diff --cached --quiet; then
+            git -C "$RUNNER_TEMP/pond-pages" commit -F "$RUNNER_TEMP/pond-message.txt"
+            git -C "$RUNNER_TEMP/pond-pages" push origin HEAD:dist
+          fi

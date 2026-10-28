@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.work/
+.env*
+!.env.example
+*.log
+test-results/
+playwright-report/
+*.zip
+*.sha256

@@ -1,0 +1,427 @@
+@font-face {
+  font-family: Geist Mono;
+  src: url("./assets/geist-mono.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 100 900;
+}
+.site-background {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.18;
+  pointer-events: none;
+}
+.site-shell {
+  position: relative;
+}
+.summary strong,
+.meter-value,
+.node-network {
+  font-variant-numeric: tabular-nums;
+}
+.cf-select {
+  position: relative;
+  min-width: 0;
+  font-size: 12px;
+}
+.cf-select summary {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  list-style: none;
+  border-bottom: 1px dashed var(--line);
+  padding: 10px 0;
+}
+.cf-select summary::-webkit-details-marker {
+  display: none;
+}
+.cf-options {
+  position: absolute;
+  z-index: 20;
+  top: 100%;
+  right: 0;
+  min-width: 100%;
+  max-height: 280px;
+  overflow: auto;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  padding: 8px 14px;
+  box-shadow: 0 8px 24px #0000000a;
+}
+.cf-options button {
+  display: block;
+  white-space: nowrap;
+  text-align: left;
+  width: 100%;
+  padding: 9px 2px;
+}
+.cf-options button[aria-pressed="true"] {
+  color: var(--accent);
+}
+.cf-select:focus-within summary {
+  border-color: var(--muted);
+}
+.connection-notice:empty {
+  display: none;
+}
+.connection-notice {
+  position: relative;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: var(--accent);
+}
+.connection-notice button {
+  border-bottom: 1px dotted;
+}
+.verification {
+  padding: 12px 0;
+}
+.cf-detail {
+  position: relative !important;
+  inset: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  width: min(1040px, 100%) !important;
+  margin: 0 auto !important;
+  border: 0 !important;
+  padding: 0 !important;
+}
+.has-detail .observation-layout {
+  display: block !important;
+}
+.cf-detail .detail-content {
+  padding: 0 12px;
+}
+.ledger-identity {
+  margin: 16px 0 32px;
+}
+.ledger-imprint {
+  font-family: serif;
+  color: var(--accent);
+  font-size: 72px;
+  line-height: 1;
+  text-align: right;
+}
+.ledger-imprint small {
+  display: block;
+  font: 9px/1.7 "Geist Mono";
+  letter-spacing: 2px;
+  color: var(--muted);
+}
+.cf-detail .detail-vitals {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+.cf-detail .detail-section {
+  margin: 40px 0;
+}
+.cf-detail h3 {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  font:
+    22px/1.6 "SimSun",
+    serif;
+  border-bottom: 1px dashed var(--line);
+  padding-bottom: 14px;
+}
+.cf-detail h3 b {
+  font-weight: 400;
+  font-size: 32px;
+  color: var(--accent);
+}
+.cf-detail h3 small {
+  margin-left: auto;
+  color: var(--muted);
+  font: 10px "Geist Mono";
+  letter-spacing: 2px;
+}
+.cf-detail .machine-feature {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 0 25px;
+}
+.cf-detail .machine-feature strong {
+  font-size: 28px;
+  font-weight: 400;
+}
+.cf-detail .facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 48px;
+}
+.cf-detail dt {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.cf-detail dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.cf-waterline {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+.cf-waterline div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.cf-waterline span {
+  font-size: 11px;
+  color: var(--muted);
+}
+.cf-waterline strong {
+  font-size: 36px;
+  font-weight: 400;
+}
+.cf-tide {
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  letter-spacing: 5px;
+  font-size: 28px;
+  color: var(--line);
+  margin: 20px 0;
+}
+.cf-tide span {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-bottom: 2px solid var(--accent);
+}
+.history-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.history-controls [role="tablist"] {
+  display: flex;
+  gap: 24px;
+}
+.history-controls [aria-selected="true"] {
+  color: var(--accent);
+  border-bottom: 1px solid;
+}
+.history-controls .cf-select {
+  width: 150px;
+}
+.cf-chart {
+  margin: 32px 0 44px;
+  border-left: 1px dotted var(--line);
+  padding-left: 16px;
+  min-width: 0;
+}
+.cf-chart h4 {
+  font:
+    18px "SimSun",
+    serif;
+  font-weight: 400;
+}
+.cf-chart svg {
+  width: 100%;
+  height: auto;
+  max-height: 330px;
+  overflow: visible;
+  outline: none;
+}
+.cf-chart svg text {
+  font: 10px "Geist Mono";
+  fill: var(--muted);
+}
+.chart-grid {
+  stroke: var(--line);
+  stroke-dasharray: 2 7;
+  fill: none;
+}
+.chart-legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 10px;
+}
+.chart-readout {
+  min-height: 30px;
+  font-size: 10px;
+  color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.chart-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: center;
+}
+.detail-colophon {
+  margin: 36px 0;
+  text-align: center;
+  font:
+    12px "SimSun",
+    serif;
+  letter-spacing: 4px;
+  color: var(--faint);
+}
+.site-footer {
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.site-footer a {
+  font-size: 10px;
+}
+.settings-dialog {
+  position: fixed;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  background: var(--bg);
+  color: var(--fg);
+  border: 1px solid var(--line);
+  width: min(480px, 92vw);
+  max-height: 85vh;
+  overflow: auto;
+  padding: 24px;
+  box-shadow: 0 18px 80px #0003;
+}
+.settings-dialog:not([open]) {
+  display: none;
+}
+.settings-dialog label {
+  display: block;
+  font-size: 12px;
+  margin: 12px 0;
+}
+.settings-dialog input:not([type="checkbox"]) {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px dashed var(--line);
+  background: transparent;
+  padding: 8px 0;
+}
+.settings-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.settings-title h2 {
+  font:
+    24px "SimSun",
+    serif;
+}
+.settings-title button {
+  font-size: 24px;
+}
+.save-button {
+  border-bottom: 1px solid var(--accent);
+  color: var(--accent);
+}
+.check-label input {
+  margin-right: 10px;
+  accent-color: var(--accent);
+}
+@media (max-width: 639px) {
+  .header-actions {
+    gap: 16px;
+  }
+  .brand small {
+    max-width: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .cf-detail .detail-content {
+    padding: 0;
+  }
+  .cf-detail .detail-vitals {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 20px;
+  }
+  .cf-detail .facts {
+    gap: 20px;
+  }
+  .cf-detail .machine-feature strong {
+    font-size: 21px;
+  }
+  .cf-waterline strong {
+    font-size: 25px;
+  }
+  .cf-chart {
+    padding-left: 5px;
+  }
+  .chart-caption {
+    display: block;
+  }
+  .chart-legend {
+    gap: 12px;
+  }
+  .cf-detail h3 small {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+  .cf-detail h3 {
+    font-size: 18px;
+    gap: 12px;
+  }
+  .site-footer {
+    justify-content: flex-start;
+  }
+  .site-footer small {
+    width: 100%;
+  }
+  .header-actions .admin-link {
+    display: none;
+  }
+}
+@media (forced-colors: active) {
+  .pond-canvas,
+  .site-background {
+    display: none;
+  }
+  .cf-options,
+  .settings-dialog {
+    border: 1px solid CanvasText;
+  }
+}
+.cf-detail .detail-title {
+  font-family: "Songti SC", "SimSun", serif;
+  font-weight: 400;
+  letter-spacing: 3px;
+}
+.roster-colophon {
+  text-align: center;
+  color: var(--faint);
+  font:
+    12px "SimSun",
+    serif;
+  letter-spacing: 2px;
+  margin: 20px 0;
+}
+.header-actions .icon-button {
+  font-size: 24px;
+  min-width: 24px;
+}
+#main:focus {
+  outline: none;
+}
+@media (max-width: 639px) {
+  .header-actions {
+    gap: 12px;
+  }
+  .header-actions .admin-link {
+    display: block;
+    font-size: 10px;
+    padding-left: 8px;
+    margin-left: 0;
+  }
+}
